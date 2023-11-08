@@ -2,17 +2,19 @@
 
 [ext_resource type="Script" path="res://gameplay/gameplay.gd" id="1_thqv1"]
 [ext_resource type="Texture2D" uid="uid://bgprycbqd2tbx" path="res://assets/icon.svg" id="2_o7ako"]
-[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://paused/paused.tscn" id="3_w8wrl"]
+[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://ui/paused/paused.tscn" id="3_w8wrl"]
 [ext_resource type="PackedScene" uid="uid://cee5dna3u27jf" path="res://assets/select_sfx.tscn" id="4_7kf0b"]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_thqv1")
 
 [node name="Icon" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(655, 453)
 texture = ExtResource("2_o7ako")
 
 [node name="Stack" type="VFlowContainer" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -48,7 +50,12 @@ size_flags_horizontal = 4
 text = "View Template Source"
 uri = "https://github.com/brettchalupa/godot_skeleton"
 
-[node name="Paused" parent="." instance=ExtResource("3_w8wrl")]
+[node name="SelectSfx" parent="." instance=ExtResource("4_7kf0b")]
+bus = &"Sfx"
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+
+[node name="Paused" parent="PauseLayer" instance=ExtResource("3_w8wrl")]
 visible = false
 anchors_preset = 0
 anchor_right = 0.0
@@ -56,4 +63,10 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="SelectSfx" parent="." instance=ExtResource("4_7kf0b")]
+[node name="LevelManager" type="Node2D" parent="."]
+
+[node name="Combatants" type="Node2D" parent="LevelManager"]
+
+[node name="Projectiles" type="Node2D" parent="LevelManager"]
+
+[node name="WinLoseScreen" type="CanvasLayer" parent="."]
